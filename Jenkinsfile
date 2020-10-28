@@ -11,15 +11,18 @@ pipeline {
             steps {
                 script {
                     timeout(time: 60, unit: 'SECONDS') {
-                            vaultToken = input(
+                            userInput = input(
                                 message:    'Input required!',
                                 parameters: [
                                     password(defaultValue: 'value', description: 'Vault token to access secrets required for AppStore build. Needs to be in group mobile20-appstore.', name: 'vault_token'),
-                                    string(defaultValue: 'None',
+                                    string(defaultValue: 'CN',
                                             description: 'Path of config file',
-                                            name: 'Config')
+                                            name: 'region')
                                 ]
                             )
+
+                            region = userInput.region
+
                     }
                 }
             }
@@ -28,7 +31,8 @@ pipeline {
         stage("Build") {
             steps {
                 echo "hello build"
-                echo "$vaultToken"
+                echo "$userInput"
+                echo "$region"
             }
         }
         
