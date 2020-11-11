@@ -33,7 +33,9 @@ pipeline {
                 echo "hello build"
                 echo "$userInput"
                 echo "$region"
-                sh "ls"
+                script {
+                    sh "ls"
+                }
 
             }
         }
