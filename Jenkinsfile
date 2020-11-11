@@ -34,6 +34,7 @@ pipeline {
                 echo "$userInput"
                 echo "$region"
                 script {
+                    sh "./countly_dsym_uploader.sh"
                     sh "ls"
                 }
 
