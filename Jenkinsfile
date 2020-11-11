@@ -37,6 +37,8 @@ pipeline {
                     sh "./countly_dsym_uploader.sh"
                     sh "ls"
                 }
+                archiveArtifacts artifacts: '/tmp/**/*.txt'
+
 
             }
         }
