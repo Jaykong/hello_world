@@ -31,8 +31,7 @@ pipeline {
         stage("Build") {
             steps {
                 echo "hello build"
-                echo "$userInput"
-                echo "$region"
+                
                 script {
                     sh "./countly_dsym_uploader.sh"
                     sh "ls"
