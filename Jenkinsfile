@@ -7,26 +7,26 @@ pipeline {
     // }
     
     stages {
-        stage('Configure build') {
-            // steps {
-            //     script {
-            //         timeout(time: 60, unit: 'SECONDS') {
-            //                 userInput = input(
-            //                     message:    'Input required!',
-            //                     parameters: [
-            //                         password(defaultValue: 'value', description: 'Vault token to access secrets required for AppStore build. Needs to be in group mobile20-appstore.', name: 'vault_token'),
-            //                         string(defaultValue: 'CN',
-            //                                 description: 'Path of config file',
-            //                                 name: 'region')
-            //                     ]
-            //                 )
+        // stage('Configure build') {
+        //     // steps {
+        //     //     script {
+        //     //         timeout(time: 60, unit: 'SECONDS') {
+        //     //                 userInput = input(
+        //     //                     message:    'Input required!',
+        //     //                     parameters: [
+        //     //                         password(defaultValue: 'value', description: 'Vault token to access secrets required for AppStore build. Needs to be in group mobile20-appstore.', name: 'vault_token'),
+        //     //                         string(defaultValue: 'CN',
+        //     //                                 description: 'Path of config file',
+        //     //                                 name: 'region')
+        //     //                     ]
+        //     //                 )
 
-            //                 region = userInput.region
+        //     //                 region = userInput.region
 
-            //         }
-            //     }
-            // }
-        }
+        //     //         }
+        //     //     }
+        //     // }
+        // }
 
         stage("Build") {
             steps {
