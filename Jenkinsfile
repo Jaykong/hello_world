@@ -29,11 +29,9 @@ pipeline {
             }
             
             matrix {
-                stages {
-                    stage('config') {
-                        steps {
-                            echo "$PLATFORM_FILTER"
-                        }
+                stage('config') {
+                    steps {
+                        echo "$PLATFORM_FILTER"
                     }
                 }
                 when { anyOf {
