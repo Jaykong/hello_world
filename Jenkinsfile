@@ -9,6 +9,7 @@ pipeline {
                 agent any
                 when { anyOf {
                     expression { params.PLATFORM_FILTER == 'all' }
+                    echo "$env.PLATFORM"
                     expression { params.PLATFORM_FILTER == env.PLATFORM }
                 } }
                 axes {
