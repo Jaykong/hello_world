@@ -9,7 +9,7 @@ pipeline {
                             vaultToken = input(
                                 message:    'Input required!',
                                 parameters: [
-                                    password(defaultValue: 'value', description: 'Vault token to access secrets required for AppStore build. Needs to be in group mobile20-appstore.', name: 'vault_token')
+                                    password(defaultValue: 'value', description: 'Vault token to access secrets required for AppStore build. Needs to be in group mobile20-appstore.', name: 'vault_token'),
                                     choice(name: 'PLATFORM_FILTER', choices: ['all', 'cn', 'row', 'kr'], description: 'Run on specific platform')
 
                                 ]
