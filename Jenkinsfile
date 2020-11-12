@@ -23,12 +23,12 @@ pipeline {
         stage('BuildAndTest') {
             environment {
                 VAULT_TOKEN = "$vaultToken"
-                params = "$vaultToken['PLATFORM_FILTER']"
+                PLATFORM_FILTER = "$vaultToken['PLATFORM_FILTER']"
             }
             matrix {
                 when { anyOf {
-                    expression { params.PLATFORM_FILTER == 'all' && env.PLATFORM != 'cn' }
-                    expression { params.PLATFORM_FILTER == env.PLATFORM }
+                    expression { PLATFORM_FILTER == 'all' && env.PLATFORM != 'cn' }
+                    expression { PLATFORM_FILTER == env.PLATFORM }
                 } }
                 axes {
                     axis {
