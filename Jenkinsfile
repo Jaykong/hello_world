@@ -19,6 +19,9 @@ pipeline {
             }
         }
         stage('BuildAndTest') {
+            environment {
+                VAULT_TOKEN = "$vaultToken"
+            }
             matrix {
                 when { anyOf {
                     expression { params.PLATFORM_FILTER == 'all' && env.PLATFORM != 'cn' }
