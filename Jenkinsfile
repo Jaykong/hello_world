@@ -1,4 +1,8 @@
-// you can add more axes and this will still work
+
+pipeline {
+
+
+    // you can add more axes and this will still work
 Map matrix_axes = [
     PLATFORM: ['linux', 'windows', 'mac'],
     BROWSER: ['firefox', 'chrome', 'safari', 'edge']
@@ -57,4 +61,6 @@ for(int i = 0; i < axes.size(); i++) {
 
 stage("Matrix builds") {
     parallel(tasks)
+}
+
 }
