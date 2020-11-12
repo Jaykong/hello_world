@@ -25,11 +25,17 @@ pipeline {
             environment {
                 VAULT_TOKEN = "$vaultToken"
                 PLATFORM_FILTER = "$vaultToken['PLATFORM_FILTER']"
-                echo "$PLATFORM_FILTER"
 
             }
             
             matrix {
+                stages {
+                    stage('config') {
+                        steps {
+                            echo "$PLATFORM_FILTER"
+                        }
+                    }
+                }
                 when { anyOf {
                     expression { PLATFORM_FILTER == 'all' && env.PLATFORM != 'cn' }
                     expression { PLATFORM_FILTER == env.PLATFORM }
