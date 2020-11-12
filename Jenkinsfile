@@ -6,9 +6,7 @@ pipeline {
     stages {
         stage('BuildAndTest') {
             matrix {
-                agent {
-                    label "${PLATFORM}-agent"
-                }
+                agent any
                 when { anyOf {
                     expression { params.PLATFORM_FILTER == 'all' }
                     expression { params.PLATFORM_FILTER == env.PLATFORM }
