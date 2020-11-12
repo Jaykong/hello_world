@@ -1,6 +1,6 @@
 pipeline {
     parameters {
-        choice(name: 'PLATFORM_FILTER', choices: ['all', 'linux', 'windows', 'mac'], description: 'Run on specific platform')
+        choice(name: 'PLATFORM_FILTER', choices: ['all', 'cn', 'row', 'kr'], description: 'Run on specific platform')
     }
     agent none
     stages {
@@ -8,41 +8,20 @@ pipeline {
             matrix {
                 agent any
                 when { anyOf {
-                    expression { params.PLATFORM_FILTER == 'all' }
+                    expression { params.PLATFORM_FILTER == 'all' && params.PLATFORM_FILTER != 'cn' }
                     expression { params.PLATFORM_FILTER == env.PLATFORM }
                 } }
                 axes {
                     axis {
                         name 'PLATFORM'
-                        values 'linux', 'windows', 'mac'
+                        values 'cn', 'row', 'kr'
                     }
                     axis {
                         name 'BROWSER'
                         values 'firefox', 'chrome', 'safari', 'edge'
                     }
                 }
-                excludes {
-                    exclude {
-                        axis {
-                            name 'PLATFORM'
-                            values 'linux'
-                        }
-                        axis {
-                            name 'BROWSER'
-                            values 'safari'
-                        }
-                    }
-                    exclude {
-                        axis {
-                            name 'PLATFORM'
-                            notValues 'windows'
-                        }
-                        axis {
-                            name 'BROWSER'
-                            values 'edge'
-                        }
-                    }
-                }
+            
                 stages {
                     stage('Build') {
                         steps {
