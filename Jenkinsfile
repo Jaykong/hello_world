@@ -1,9 +1,23 @@
 pipeline {
-    parameters {
-        choice(name: 'PLATFORM_FILTER', choices: ['all', 'cn', 'row', 'kr'], description: 'Run on specific platform')
-    }
+  
     agent none
     stages {
+         stage('Configure build') {
+            steps {
+                script {
+                    timeout(time: 60, unit: 'SECONDS') {
+                            vaultToken = input(
+                                message:    'Input required!',
+                                parameters: [
+                                    password(defaultValue: 'value', description: 'Vault token to access secrets required for AppStore build. Needs to be in group mobile20-appstore.', name: 'vault_token')
+                                    choice(name: 'PLATFORM_FILTER', choices: ['all', 'cn', 'row', 'kr'], description: 'Run on specific platform')
+
+                                ]
+                            )
+                    }
+                }
+            }
+        }
         stage('BuildAndTest') {
             matrix {
                 agent any
