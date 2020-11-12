@@ -25,6 +25,8 @@ pipeline {
             environment {
                 VAULT_TOKEN = "$vaultToken"
                 PLATFORM_FILTER = "$vaultToken['PLATFORM_FILTER']"
+                echo "$PLATFORM_FILTER"
+
             }
             
             matrix {
@@ -46,7 +48,6 @@ pipeline {
                 stages {
                     stage('Build') {
                         steps {
-                            echo "$PLATFORM_FILTER"
 
                             echo "Do Build for ${PLATFORM} - ${BROWSER}"
                         }
