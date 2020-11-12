@@ -1,5 +1,6 @@
 pipeline {
-  
+    agent any
+
     stages {
          stage('Configure build') {
             steps {
@@ -19,7 +20,6 @@ pipeline {
         }
         stage('BuildAndTest') {
             matrix {
-                agent any
                 when { anyOf {
                     expression { params.PLATFORM_FILTER == 'all' && env.PLATFORM != 'cn' }
                     expression { params.PLATFORM_FILTER == env.PLATFORM }
