@@ -30,10 +30,10 @@ pipeline {
             
             matrix {
                 
-                // when { anyOf {
-                //     expression { PLATFORM_FILTER == 'all' && env.PLATFORM != 'cn' }
-                //     expression { PLATFORM_FILTER == env.PLATFORM }
-                // } }
+                when { anyOf {
+                    expression { PLATFORM_FILTER == 'all' && env.PLATFORM != 'cn' }
+                    expression { PLATFORM_FILTER == env.PLATFORM }
+                } }
                 axes {
                     axis {
                         name 'PLATFORM'
