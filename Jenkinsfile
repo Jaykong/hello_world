@@ -6,7 +6,7 @@ pipeline {
                 agent any
                 axes {
                     axis {
-                        name 'PLATFORM'
+                        name 'PLATFORM1'
                         values 'linux', 'windows', 'mac'
                     }
                     axis {
