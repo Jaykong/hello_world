@@ -21,9 +21,13 @@ pipeline {
             }
         }
         stage('BuildAndTest') {
+            
             environment {
                 VAULT_TOKEN = "$vaultToken"
                 PLATFORM_FILTER = "$vaultToken['PLATFORM_FILTER']"
+            }
+            steps {
+                echo "$PLATFORM_FILTER"
             }
             matrix {
                 when { anyOf {
