@@ -1,6 +1,5 @@
 pipeline {
   
-    agent none
     stages {
          stage('Configure build') {
             steps {
@@ -36,18 +35,18 @@ pipeline {
                     }
                 }
             
-                stages {
-                    stage('Build') {
-                        steps {
-                            echo "Do Build for ${PLATFORM} - ${BROWSER}"
-                        }
-                    }
-                    stage('Test') {
-                        steps {
-                            echo "Do Test for ${PLATFORM} - ${BROWSER}"
-                        }
-                    }
+                
+            stage('Build') {
+                steps {
+                    echo "Do Build for ${PLATFORM} - ${BROWSER}"
                 }
+            }
+            stage('Test') {
+                steps {
+                    echo "Do Test for ${PLATFORM} - ${BROWSER}"
+                }
+            }
+                
             }
         }
     }
