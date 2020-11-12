@@ -29,15 +29,11 @@ pipeline {
             }
             
             matrix {
-                stage('config') {
-                    steps {
-                        echo "$PLATFORM_FILTER"
-                    }
-                }
-                when { anyOf {
-                    expression { PLATFORM_FILTER == 'all' && env.PLATFORM != 'cn' }
-                    expression { PLATFORM_FILTER == env.PLATFORM }
-                } }
+                
+                // when { anyOf {
+                //     expression { PLATFORM_FILTER == 'all' && env.PLATFORM != 'cn' }
+                //     expression { PLATFORM_FILTER == env.PLATFORM }
+                // } }
                 axes {
                     axis {
                         name 'PLATFORM'
@@ -52,6 +48,8 @@ pipeline {
                 stages {
                     stage('Build') {
                         steps {
+                            echo "$PLATFORM_FILTER"
+
 
                             echo "Do Build for ${PLATFORM} - ${BROWSER}"
                         }
