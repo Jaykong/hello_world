@@ -17,7 +17,7 @@ pipeline {
                 stages {
                     stage('Build') {
                         steps {
-                            echo "Do Build for ${PLATFORM} - ${BROWSER}"
+                            echo "Do Build for ${PLATFORM1} - ${BROWSER}"
                         }
                     }
                     stage('Test') {
