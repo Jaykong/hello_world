@@ -24,7 +24,7 @@ pipeline {
             
             environment {
                 VAULT_TOKEN = "$vaultToken"
-                PLATFORM_FILTER = "$vaultToken['PLATFORM_FILTER']"
+                PLATFORM_FILTER = "${vaultToken['PLATFORM_FILTER']}"
 
             }
             
