@@ -14,6 +14,8 @@ pipeline {
 
                                 ]
                             )
+                               
+                            
                     }
                 }
             }
@@ -21,6 +23,7 @@ pipeline {
         stage('BuildAndTest') {
             environment {
                 VAULT_TOKEN = "$vaultToken"
+                params = "$vaultToken['PLATFORM_FILTER']"
             }
             matrix {
                 when { anyOf {
