@@ -26,9 +26,7 @@ pipeline {
                 VAULT_TOKEN = "$vaultToken"
                 PLATFORM_FILTER = "$vaultToken['PLATFORM_FILTER']"
             }
-            steps {
-                echo "$PLATFORM_FILTER"
-            }
+            
             matrix {
                 when { anyOf {
                     expression { PLATFORM_FILTER == 'all' && env.PLATFORM != 'cn' }
@@ -48,6 +46,8 @@ pipeline {
                 stages {
                     stage('Build') {
                         steps {
+                            echo "$PLATFORM_FILTER"
+
                             echo "Do Build for ${PLATFORM} - ${BROWSER}"
                         }
                     }
