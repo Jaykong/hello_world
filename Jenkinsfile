@@ -6,7 +6,7 @@ pipeline {
                 agent any
                 axes {
                     axis {
-                        name 'PLATFORM1'
+                        name 'PLATFORM2'
                         values 'linux', 'windows', 'mac'
                     }
                     axis {
@@ -17,7 +17,7 @@ pipeline {
                 stages {
                     stage('Build') {
                         steps {
-                            echo "Do Build for ${PLATFORM1} - ${BROWSER}"
+                            echo "Do Build for ${PLATFORM} - ${BROWSER}"
                         }
                     }
                     stage('Test') {
