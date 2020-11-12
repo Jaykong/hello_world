@@ -10,7 +10,7 @@ pipeline {
                                 message:    'Input required!',
                                 parameters: [
                                     password(defaultValue: 'value', description: 'Vault token to access secrets required for AppStore build. Needs to be in group mobile20-appstore.', name: 'vault_token'),
-                                    choice(name: 'PLATFORM_FILTER', choices: ['all', 'cn', 'row', 'kr'], description: 'Run on specific platform')
+                                    choice(name: 'REGION_PICKER', choices: ['global', 'ROW', 'CN', 'KR'], description: 'Run on specific region')
 
                                 ]
                             )
@@ -23,15 +23,15 @@ pipeline {
         stage('BuildAndTest') {
             
             environment {
-                VAULT_TOKEN = "$vaultToken"
-                PLATFORM_FILTER = "${vaultToken['PLATFORM_FILTER']}"
+                VAULT_TOKEN = "${vaultToken['vault_token']}"
+                PLATFORM_FILTER = "${vaultToken['REGION_PICKER']}"
 
             }
             
             matrix {
                 
                 when { anyOf {
-                    expression { PLATFORM_FILTER == 'all' && env.PLATFORM != 'cn' }
+                    expression { PLATFORM_FILTER == 'global' && env.PLATFORM != 'cn' }
                     expression { PLATFORM_FILTER == env.PLATFORM }
                 } }
                 axes {
@@ -57,6 +57,9 @@ pipeline {
                     stage('Test') {
                         steps {
                             echo "Do Test for ${PLATFORM} - ${BROWSER}"
+                            stage{
+                                echo "stage in steps"
+                            }
                         }
                     }
 
