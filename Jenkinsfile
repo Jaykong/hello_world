@@ -256,18 +256,18 @@ pipeline {
                             //     sh("./scripts/pipeline/build_ios_appstore.sh '${appId}' '${teamId}' '${flavor}' '${BUILD_NUMBER}' '${target}' '${REGION}' '${BRAND}'")
                             // }
                         }
-                        post {
-                            always {
-                                sh("./scripts/pipeline/upload_dsym.sh '$flavor'")
-                                archiveArtifacts artifacts: '**/*.dSYM.zip'
-                                sh "rm -rf /Users/vagrant/Library/Developer/Xcode/DerivedData/*"
-                                sh("git clean -dfx")
-                                // Remove keychain from slave
-                                sh("security list-keychains -s /Users/vagrant/Library/Keychains/login.keychain-db /Library/Keychains/System.keychain")
-                                sh("rm -f /Users/vagrant/ios-appstore.keychain-db")
-                                cleanWs(disableDeferredWipeout: true)
-                            }
-                        }
+                        // post {
+                        //     always {
+                        //         sh("./scripts/pipeline/upload_dsym.sh '$flavor'")
+                        //         archiveArtifacts artifacts: '**/*.dSYM.zip'
+                        //         sh "rm -rf /Users/vagrant/Library/Developer/Xcode/DerivedData/*"
+                        //         sh("git clean -dfx")
+                        //         // Remove keychain from slave
+                        //         sh("security list-keychains -s /Users/vagrant/Library/Keychains/login.keychain-db /Library/Keychains/System.keychain")
+                        //         sh("rm -f /Users/vagrant/ios-appstore.keychain-db")
+                        //         cleanWs(disableDeferredWipeout: true)
+                        //     }
+                        // }
                     }
                 }
             }
