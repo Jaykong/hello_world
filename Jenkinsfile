@@ -97,9 +97,13 @@ pipeline {
         stage('Verify vault token') {
             environment {
                 VAULT_TOKEN = "${inputValue['vault_token']}"
+                regionPicker = "${inputValue['REGION_PICKER']}"
+
             }
             steps {
                 echo "Verify vault token"
+                echo "$regionPicker"
+
             }
             // steps {
             //     sh("vault token lookup | grep display_name") // Makes sure to fail early if token is invalid, prints token owner when successful
@@ -114,7 +118,6 @@ pipeline {
                 TEAM_ID_BMW_AG = "5GRN39QKB9"
                 TEAM_ID_BMW_NA = "XC36KHSA2U"
                 TEAM_ID_BMW_CHINA = "RYA5A9UM3L"
-                regionPicker = "${inputValue['REGION_PICKER']}"
 
             }
            
@@ -243,7 +246,6 @@ pipeline {
 
                         }
                         steps {
-                            echo "$regionPicker"
                             echo "Building iOS for $BRAND $REGION"
                             // script {
                             //     def flavor = getFlavor(env.BRAND, env.REGION)
