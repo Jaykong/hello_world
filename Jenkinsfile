@@ -119,8 +119,8 @@ pipeline {
                 TEAM_ID_BMW_CHINA = "RYA5A9UM3L"
             }
             when { anyOf {
-                    expression { regionPicker == 'global' && env.PLATFORM != 'CN' }
-                    expression { regionPicker == env.PLATFORM }
+                    expression { regionPicker == 'global' && env.REGION != 'CN' }
+                    expression { regionPicker == env.REGION }
             } }
             matrix {
                 axes {
