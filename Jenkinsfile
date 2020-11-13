@@ -100,7 +100,6 @@ pipeline {
             }
             steps {
                 echo "Verify vault token"
-                echo "$regionPicker"
             }
             // steps {
             //     sh("vault token lookup | grep display_name") // Makes sure to fail early if token is invalid, prints token owner when successful
@@ -158,6 +157,8 @@ pipeline {
                             stage('Prepare node') {
                                 steps {
                                     echo "Prepare node"
+                                    echo "$regionPicker"
+
                                 }
                                 // steps {
                                 //     sh("git clean -dfx")
