@@ -228,7 +228,7 @@ pipeline {
                     //             cleanWs(disableDeferredWipeout: true)
                     //         }
                     //     }
-                    // }
+                    }
                     stage('iOS') {
                         when {
                             // beforeAgent true
