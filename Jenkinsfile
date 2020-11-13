@@ -101,6 +101,7 @@ pipeline {
             }
             steps {
                 echo "Verify vault token"
+                echo "$REGION_PICKER"
             }
             // steps {
             //     sh("vault token lookup | grep display_name") // Makes sure to fail early if token is invalid, prints token owner when successful
