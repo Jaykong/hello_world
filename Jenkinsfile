@@ -99,6 +99,9 @@ pipeline {
                 VAULT_TOKEN = "${inputValue['vault_token']}"
                 REGION_PICKER = "${inputValue['REGION_PICKER']}"
             }
+            steps {
+                echo "Verify vault token"
+            }
             // steps {
             //     sh("vault token lookup | grep display_name") // Makes sure to fail early if token is invalid, prints token owner when successful
             // }
@@ -151,6 +154,9 @@ pipeline {
                         // }
                         stages {
                             stage('Prepare node') {
+                                steps {
+                                    echo "Prepare node"
+                                }
                                 // steps {
                                 //     sh("git clean -dfx")
                                 //     sh("bmwsys vault az-msi-login jenkins")
@@ -193,20 +199,20 @@ pipeline {
                                 when {
                                     expression {env.REGION == 'CN'}
                                 }
-                                // steps {
-                                //     echo "Building Android for $BRAND $REGION"
-                                //     script {
-                                //         def target = getTarget(env.BRAND, env.REGION)
-                                //         def packageName = getAppId(env.BRAND, env.REGION)
+                                steps {
+                                    echo "Building Android for $BRAND $REGION"
+                                    // script {
+                                    //     def target = getTarget(env.BRAND, env.REGION)
+                                    //     def packageName = getAppId(env.BRAND, env.REGION)
 
-                                //         sh("./scripts/pipeline/preprocess_pubspec.sh ${FLAVOR}")
-                                //         sh("./scripts/pipeline/load_keys_from_vault.sh ${FLAVOR} --appstore")
-                                //         sh("./scripts/pipeline/load_android_signing_configuration.sh --appstore")
-                                //         sh("flutter packages get")
-                                //         sh("export FLAVOR=${flavor} && flutter build apk --release -t ${target} --flavor ${flavor} --build-number=${BUILD_NUMBER}")
-                                //     }
-                                //     archiveArtifacts '**/*.apk'
-                                // }
+                                    //     sh("./scripts/pipeline/preprocess_pubspec.sh ${FLAVOR}")
+                                    //     sh("./scripts/pipeline/load_keys_from_vault.sh ${FLAVOR} --appstore")
+                                    //     sh("./scripts/pipeline/load_android_signing_configuration.sh --appstore")
+                                    //     sh("flutter packages get")
+                                    //     sh("export FLAVOR=${flavor} && flutter build apk --release -t ${target} --flavor ${flavor} --build-number=${BUILD_NUMBER}")
+                                    // }
+                                    // archiveArtifacts '**/*.apk'
+                                }
                             }
                             
                         }
