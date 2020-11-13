@@ -117,11 +117,12 @@ pipeline {
                 regionPicker = "${inputValue['REGION_PICKER']}"
 
             }
-            when { anyOf {
+           
+            matrix {
+                when { anyOf {
                     expression { regionPicker == 'global' && env.REGION != 'CN' }
                     expression { regionPicker == env.REGION }
-            } }
-            matrix {
+                } }
                 axes {
                     axis {
                         name 'PLATFORM'
