@@ -233,7 +233,6 @@ pipeline {
                         when {
                             // beforeAgent true
                             environment name: 'PLATFORM', value: 'ios'
-                            regionPicker = "${inputValue['REGION_PICKER']}"
 
                         }
                         // agent {
@@ -244,6 +243,8 @@ pipeline {
                         // }
                         environment {
                             VAULT_TOKEN = "${inputValue['vault_token']}"
+                            regionPicker = "${inputValue['REGION_PICKER']}"
+
 
                         }
                         steps {
