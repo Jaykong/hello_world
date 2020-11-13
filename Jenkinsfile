@@ -231,8 +231,10 @@ pipeline {
                     // }
                     stage('iOS') {
                         when {
-                            beforeAgent true
+                            // beforeAgent true
                             environment name: 'PLATFORM', value: 'ios'
+                            regionPicker = "${inputValue['REGION_PICKER']}"
+
                         }
                         // agent {
                         //     any
