@@ -1,6 +1,6 @@
 def globalTimeoutMinutes = 90
 def vaultToken
-
+def regionPicker
 def getTeamId(String region) {
     switch(region) {
         case "NA":
@@ -157,7 +157,6 @@ pipeline {
                             stage('Prepare node') {
                                 steps {
                                     echo "Prepare node"
-                                    echo "$regionPicker"
 
                                 }
                                 // steps {
