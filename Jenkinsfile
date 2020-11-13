@@ -1,5 +1,6 @@
 def globalTimeoutMinutes = 90
 def vaultToken
+def regionPicker
 
 def getTeamId(String region) {
     switch(region) {
@@ -97,11 +98,11 @@ pipeline {
         stage('Verify vault token') {
             environment {
                 VAULT_TOKEN = "${inputValue['vault_token']}"
-                REGION_PICKER = "${inputValue['REGION_PICKER']}"
+                regionPicker = "${inputValue['REGION_PICKER']}"
             }
             steps {
                 echo "Verify vault token"
-                echo "$REGION_PICKER"
+                echo "$regionPicker"
             }
             // steps {
             //     sh("vault token lookup | grep display_name") // Makes sure to fail early if token is invalid, prints token owner when successful
@@ -118,8 +119,8 @@ pipeline {
                 TEAM_ID_BMW_CHINA = "RYA5A9UM3L"
             }
             when { anyOf {
-                    expression { REGION_PICKER == 'global' && env.PLATFORM != 'CN' }
-                    expression { REGION_PICKER == env.PLATFORM }
+                    expression { regionPicker == 'global' && env.PLATFORM != 'CN' }
+                    expression { regionPicker == env.PLATFORM }
             } }
             matrix {
                 axes {
