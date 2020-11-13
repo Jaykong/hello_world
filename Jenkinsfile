@@ -117,7 +117,7 @@ pipeline {
                 TEAM_ID_BMW_AG = "5GRN39QKB9"
                 TEAM_ID_BMW_NA = "XC36KHSA2U"
                 TEAM_ID_BMW_CHINA = "RYA5A9UM3L"
-
+                regionPicker = "${inputValue['REGION_PICKER']}"
             }
            
             matrix {
