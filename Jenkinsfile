@@ -117,13 +117,13 @@ pipeline {
                 TEAM_ID_BMW_AG = "5GRN39QKB9"
                 TEAM_ID_BMW_NA = "XC36KHSA2U"
                 TEAM_ID_BMW_CHINA = "RYA5A9UM3L"
-                regionPicker = "${inputValue['REGION_PICKER']}"
+                REGION_PICKER = "${inputValue['REGION_PICKER']}"
             }
            
             matrix {
                 when { anyOf {
-                    expression { regionPicker == 'global' && env.REGION != 'CN' }
-                    expression { regionPicker == env.REGION }
+                    expression { REGION_PICKER == 'global' && env.REGION != 'CN' }
+                    expression { REGION_PICKER == env.REGION }
                 } }
                 axes {
                     axis {
@@ -143,84 +143,84 @@ pipeline {
                     skipDefaultCheckout()
                 }
                 stages {
-                    // stage('Android') {
-                    //     when {
-                    //         beforeAgent true
-                    //         environment name: 'PLATFORM', value: 'android'
-                    //     }
-                    //     // agent {
+                    stage('Android') {
+                        when {
+                            beforeAgent true
+                            environment name: 'PLATFORM', value: 'android'
+                        }
+                        // agent {
                             
-                    //     //     // docker {
-                    //     //     //     image("${FLUTTER_ANDROID_DOCKER_CONTAINER}")
-                    //     //     //     args('--user root')
-                    //     //     //     label('high-memory-v1')
-                    //     //     // }
-                    //     // }
-                    //     stages {
-                    //         stage('Prepare node') {
-                    //             steps {
-                    //                 echo "Prepare node"
+                        //     // docker {
+                        //     //     image("${FLUTTER_ANDROID_DOCKER_CONTAINER}")
+                        //     //     args('--user root')
+                        //     //     label('high-memory-v1')
+                        //     // }
+                        // }
+                        stages {
+                            stage('Prepare node') {
+                                steps {
+                                    echo "Prepare node"
 
-                    //             }
-                    //             // steps {
-                    //             //     sh("git clean -dfx")
-                    //             //     sh("bmwsys vault az-msi-login jenkins")
-                    //             //     sh("az-bmw-git-login")
-                    //             //     sh("./scripts/pipeline/load_artifactory_credentials_from_vault.sh")
-                    //             // }
-                    //         }
-                    //         stage('Build global') {
+                                }
+                                // steps {
+                                //     sh("git clean -dfx")
+                                //     sh("bmwsys vault az-msi-login jenkins")
+                                //     sh("az-bmw-git-login")
+                                //     sh("./scripts/pipeline/load_artifactory_credentials_from_vault.sh")
+                                // }
+                            }
+                            stage('Build global') {
                                
-                    //             environment {
-                    //                 VAULT_TOKEN = "${inputValue['vault_token']}"
-                    //                 FLAVOR = getFlavor(env.BRAND, env.REGION)
-                    //             }
-                    //             when {
-                    //                 expression {env.REGION != 'CN'}
-                    //             }
-                    //             steps {
-                    //                 echo "Building Android for $BRAND $REGION"
-                    //                 // script {
-                    //                 //     def target = getTarget(env.BRAND, env.REGION)
-                    //                 //     def packageName = getAppId(env.BRAND, env.REGION)
+                                environment {
+                                    VAULT_TOKEN = "${inputValue['vault_token']}"
+                                    FLAVOR = getFlavor(env.BRAND, env.REGION)
+                                }
+                                when {
+                                    expression {env.REGION != 'CN'}
+                                }
+                                steps {
+                                    echo "Building Android for $BRAND $REGION"
+                                    // script {
+                                    //     def target = getTarget(env.BRAND, env.REGION)
+                                    //     def packageName = getAppId(env.BRAND, env.REGION)
 
-                    //                 //     sh("./scripts/pipeline/preprocess_pubspec.sh ${FLAVOR}")
-                    //                 //     sh("./scripts/pipeline/load_keys_from_vault.sh ${FLAVOR} --appstore")
-                    //                 //     sh("./scripts/pipeline/load_android_signing_configuration.sh --appstore")
-                    //                 //     sh("flutter packages get")
-                    //                 //     sh("flutter build appbundle --release -t ${target} --flavor ${FLAVOR} --build-number=${BUILD_NUMBER}")
+                                    //     sh("./scripts/pipeline/preprocess_pubspec.sh ${FLAVOR}")
+                                    //     sh("./scripts/pipeline/load_keys_from_vault.sh ${FLAVOR} --appstore")
+                                    //     sh("./scripts/pipeline/load_android_signing_configuration.sh --appstore")
+                                    //     sh("flutter packages get")
+                                    //     sh("flutter build appbundle --release -t ${target} --flavor ${FLAVOR} --build-number=${BUILD_NUMBER}")
 
-                    //                 //     sh("vault kv get -field=jsonkey secret/mobile20-appstore/android/play_account > ./android/gpuk.json")
-                    //                 //     sh("cd android; ./gradlew publish${FLAVOR.capitalize()}ReleaseBundle")
-                    //                 // }
-                    //             }
-                    //         }
-                    //         stage('Build cn') {
+                                    //     sh("vault kv get -field=jsonkey secret/mobile20-appstore/android/play_account > ./android/gpuk.json")
+                                    //     sh("cd android; ./gradlew publish${FLAVOR.capitalize()}ReleaseBundle")
+                                    // }
+                                }
+                            }
+                            stage('Build cn') {
                                
-                    //             environment {
-                    //                 VAULT_TOKEN = "${inputValue['vault_token']}"
-                    //                 FLAVOR = getFlavor(env.BRAND, env.REGION)
-                    //             }
-                    //             when {
-                    //                 expression {env.REGION == 'CN'}
-                    //             }
-                    //             steps {
-                    //                 echo "Building Android for $BRAND $REGION"
-                    //                 // script {
-                    //                 //     def target = getTarget(env.BRAND, env.REGION)
-                    //                 //     def packageName = getAppId(env.BRAND, env.REGION)
+                                environment {
+                                    VAULT_TOKEN = "${inputValue['vault_token']}"
+                                    FLAVOR = getFlavor(env.BRAND, env.REGION)
+                                }
+                                when {
+                                    expression {env.REGION == 'CN'}
+                                }
+                                steps {
+                                    echo "Building Android for $BRAND $REGION"
+                                    // script {
+                                    //     def target = getTarget(env.BRAND, env.REGION)
+                                    //     def packageName = getAppId(env.BRAND, env.REGION)
 
-                    //                 //     sh("./scripts/pipeline/preprocess_pubspec.sh ${FLAVOR}")
-                    //                 //     sh("./scripts/pipeline/load_keys_from_vault.sh ${FLAVOR} --appstore")
-                    //                 //     sh("./scripts/pipeline/load_android_signing_configuration.sh --appstore")
-                    //                 //     sh("flutter packages get")
-                    //                 //     sh("export FLAVOR=${flavor} && flutter build apk --release -t ${target} --flavor ${flavor} --build-number=${BUILD_NUMBER}")
-                    //                 // }
-                    //                 // archiveArtifacts '**/*.apk'
-                    //             }
-                    //         }
+                                    //     sh("./scripts/pipeline/preprocess_pubspec.sh ${FLAVOR}")
+                                    //     sh("./scripts/pipeline/load_keys_from_vault.sh ${FLAVOR} --appstore")
+                                    //     sh("./scripts/pipeline/load_android_signing_configuration.sh --appstore")
+                                    //     sh("flutter packages get")
+                                    //     sh("export FLAVOR=${flavor} && flutter build apk --release -t ${target} --flavor ${flavor} --build-number=${BUILD_NUMBER}")
+                                    // }
+                                    // archiveArtifacts '**/*.apk'
+                                }
+                            }
                             
-                    //     }
+                        }
                     //     post {
                     //         always {
                     //             // archiveArtifacts artifacts: 'build/app/outputs/bundle/**/*.aab'
