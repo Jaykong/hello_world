@@ -242,6 +242,7 @@ pipeline {
 
                         }
                         steps {
+                            echo "$regionPicker"
                             echo "Building iOS for $BRAND $REGION"
                             // script {
                             //     def flavor = getFlavor(env.BRAND, env.REGION)
