@@ -141,14 +141,14 @@ pipeline {
                             beforeAgent true
                             environment name: 'PLATFORM', value: 'android'
                         }
-                        agent {
-                            any
-                            // docker {
-                            //     image("${FLUTTER_ANDROID_DOCKER_CONTAINER}")
-                            //     args('--user root')
-                            //     label('high-memory-v1')
-                            // }
-                        }
+                        // agent {
+                            
+                        //     // docker {
+                        //     //     image("${FLUTTER_ANDROID_DOCKER_CONTAINER}")
+                        //     //     args('--user root')
+                        //     //     label('high-memory-v1')
+                        //     // }
+                        // }
                         stages {
                             stage('Prepare node') {
                                 // steps {
@@ -223,12 +223,12 @@ pipeline {
                             beforeAgent true
                             environment name: 'PLATFORM', value: 'ios'
                         }
-                        agent {
-                            any
-                            // node {
-                            //     label "${FLUTTER_IOS_VAGRANT_LABEL}"
-                            // }
-                        }
+                        // agent {
+                        //     any
+                        //     // node {
+                        //     //     label "${FLUTTER_IOS_VAGRANT_LABEL}"
+                        //     // }
+                        // }
                         environment {
                             VAULT_TOKEN = "${inputValue['vault_token']}"
 
