@@ -220,7 +220,7 @@ pipeline {
                         }
                         post {
                             always {
-                                archiveArtifacts artifacts: 'build/app/outputs/bundle/**/*.aab'
+                                // archiveArtifacts artifacts: 'build/app/outputs/bundle/**/*.aab'
                                 sh("git clean -dfx")
                                 cleanWs(disableDeferredWipeout: true)
                             }
