@@ -194,6 +194,11 @@ pipeline {
                                     //     sh("cd android; ./gradlew publish${FLAVOR.capitalize()}ReleaseBundle")
                                     // }
                                 }
+                                post {
+                                    always {
+                                        archiveArtifacts artifacts: 'build/app/outputs/bundle/**/*.aab'
+                                    }
+                                }
                             }
                             stage('Build cn') {
                                
