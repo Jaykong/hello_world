@@ -193,12 +193,9 @@ pipeline {
                                     //     sh("vault kv get -field=jsonkey secret/mobile20-appstore/android/play_account > ./android/gpuk.json")
                                     //     sh("cd android; ./gradlew publish${FLAVOR.capitalize()}ReleaseBundle")
                                     // }
-                                }
-                                post {
-                                    always {
-                                        archiveArtifacts artifacts: 'build/app/outputs/bundle/**/*.aab'
-                                    }
-                                }
+                                     archiveArtifacts artifacts: 'build/app/outputs/bundle/**/*.aab'
+
+                                }                  
                             }
                             stage('Build cn') {
                                
